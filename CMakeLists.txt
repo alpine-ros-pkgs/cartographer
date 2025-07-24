@@ -36,9 +36,12 @@ if(WIN32)
   set(Boost_USE_STATIC_LIBS FALSE)
 endif()
 find_package(Boost REQUIRED COMPONENTS ${BOOST_COMPONENTS})
-find_package(Ceres REQUIRED COMPONENTS SuiteSparse)
+find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(Lua REQUIRED)
+
+find_package(PkgConfig)
+pkg_check_modules(LUA REQUIRED lua5.2)
+
 if(WIN32)
   # On Windows, Protobuf is incorrectly found by the bundled CMake module, so prefer native CMake config.
   set(protobuf_MODULE_COMPATIBLE TRUE CACHE INTERNAL "")
@@ -231,7 +234,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EIGEN3_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CERES_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
-  "${LUA_INCLUDE_DIR}")
+  "${LUA_INCLUDE_DIRS}")
+target_link_directories(${PROJECT_NAME} PUBLIC ${LUA_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${LUA_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
