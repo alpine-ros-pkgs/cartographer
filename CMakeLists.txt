@@ -38,7 +38,10 @@ endif()
 find_package(Boost REQUIRED COMPONENTS ${BOOST_COMPONENTS})
 find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(LuaGoogle REQUIRED)
+
+find_package(PkgConfig)
+pkg_check_modules(LUA REQUIRED lua5.2)
+
 if(WIN32)
   # On Windows, Protobuf is incorrectly found by the bundled CMake module, so prefer native CMake config.
   set(protobuf_MODULE_COMPATIBLE TRUE CACHE INTERNAL "")
@@ -233,7 +236,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CERES_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
-  "${LUA_INCLUDE_DIR}")
+  "${LUA_INCLUDE_DIRS}")
 target_link_libraries(${PROJECT_NAME} PUBLIC ${LUA_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
