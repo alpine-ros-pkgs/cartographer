@@ -2,8 +2,8 @@
 Changelog for package cartographer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.0.1000 (2025-07-24)
+---------------------
 * Fix base branch of release candidate workflow (`#6 <https://github.com/alpine-ros-pkgs/cartographer/issues/6>`_)
 * Fix CI target branch (`#4 <https://github.com/alpine-ros-pkgs/cartographer/issues/4>`_)
 * Migrate to Alpine ROS 1 (`#1 <https://github.com/alpine-ros-pkgs/cartographer/issues/1>`_)
