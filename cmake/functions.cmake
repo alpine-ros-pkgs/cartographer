@@ -81,6 +81,10 @@ macro(google_initialize_cartographer_project)
     google_add_flag(GOOG_CXX_FLAGS "-Wall")
     google_add_flag(GOOG_CXX_FLAGS "-Wpedantic")
 
+    # clalancette: disable deprecated declarations; there is currently no way to
+    # compile cartographer warning-free with this on
+    google_add_flag(GOOG_CXX_FLAGS "-Wno-deprecated-declarations")
+
     # Turn some warnings into errors.
     google_add_flag(GOOG_CXX_FLAGS "-Werror=format-security")
     google_add_flag(GOOG_CXX_FLAGS "-Werror=missing-braces")
@@ -139,5 +143,11 @@ endmacro()
 
 macro(google_enable_testing)
   enable_testing()
+  # For Ubuntu 20.04, finding gmock always throws a warning about
+  # GOOGLETEST_VERSION not being defined.  This seems to be a packaging bug, as
+  # the Googletest CMakeLists.txt seems to be installed twice and only one of
+  # them defines the variable.  We can workaround this problem by just defining
+  # some number for the version here.
+  set(GOOGLETEST_VERSION 1.10.0)
   find_package(GMock REQUIRED)
 endmacro()
