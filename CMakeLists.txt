@@ -235,6 +235,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${CERES_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
   "${LUA_INCLUDE_DIRS}")
+target_link_directories(${PROJECT_NAME} PUBLIC ${LUA_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${LUA_LIBRARIES})
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC
